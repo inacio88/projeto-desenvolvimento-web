@@ -38,6 +38,7 @@ mysqli_close($conn);
             <?php foreach($pedidos as $pedido): ?>
                 <div class="col s6 md3">
                     <div class="card">
+                        <img src="img/pizza.svg" class="pizza">
                         <div class="card-content center">
                             <h6><?php echo htmlspecialchars($pedido['nomePedido']);?></h6>
                             <ul>
