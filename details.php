@@ -1,6 +1,24 @@
 <?php
 
     include('config/db_connect.php');
+
+
+    if(isset($_POST['delete'])){
+        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+        //echo $id_to_delete;
+        $sql = "DELETE FROM pedidos WHERE id = $id_to_delete";
+        if (mysqli_query($conn, $sql)) {
+            //sucesso
+            header('Location: index.php');
+        }
+        else {
+            //falha
+            echo 'query error ' . mysqli_error($conn);
+        }
+    }
+    
+
+
     //checar get request id parametro
     if (isset($_GET['id'])) {
         $id = mysqli_real_escape_string($conn, $_GET['id']);
@@ -36,6 +54,14 @@
             <p><?php echo date($pedido['created_at']);  ?></p>
             <h5>Adicionais</h5>
             <p><?php echo htmlspecialchars($pedido['adicionais']);  ?></p>
+
+
+            <!-- Deletar -->
+            <form action="details.php" method="POST">
+                <input type="hidden" name="id_to_delete" value="<?php echo $pedido['id'] ?>">
+                <input type="submit" name="delete" value="Delete"  class="btn">
+            </form>
+
         <?php  else: ?>
             <!-- fazer algo em javascript aqui -->
             <h5>Esse pedido não existe</h5>
