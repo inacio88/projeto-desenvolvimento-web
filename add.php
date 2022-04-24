@@ -1,4 +1,6 @@
 <?php
+    include('config/db_connect.php');
+
     $email = $nomePedido = $adicionais = '';
 
    $erros = array('email'=>'','nomePedido'=>'', 'adicionais'=>'');
@@ -31,9 +33,9 @@
         }
         else{
             //echo htmlspecialchars($_POST['nomePedido']);
-            //Usando regex para ver se o pedido é valido
+            //Usando regex para ver se o pedido é valido /^[a-zA-Z0-9]+$/
             $nomePedido = $_POST['nomePedido'];
-            if (!preg_match('/^[a-zA-Z\s]+$/', $nomePedido)) {
+            if (!preg_match('/^[a-zA-Z0-9]+$/', $nomePedido)) {
                 $erros['nomePedido'] = 'O nome do pedido está inválido <br/>';
             }
         }
@@ -58,7 +60,28 @@
         }
         else{
             //echo 'O formulário está válido';
-            header('Location: index.php');
+            
+            //Essa função é para lidar com sql injection
+            $email = mysqli_real_escape_string($conn, $_POST['email']);
+            $nomePedido = mysqli_real_escape_string($conn, $_POST['nomePedido']);
+            $adicionais = mysqli_real_escape_string($conn, $_POST['adicionais']);
+
+            //Criando a query sql
+
+            $sql = "INSERT INTO pedidos(nomePedido, email, adicionais) VALUES('$nomePedido','$email','$adicionais')";
+
+            
+            // salvar no banco e checar
+            if(mysqli_query($conn, $sql)){
+                //Se a query tiver dado certo
+                header('Location: index.php');
+            }
+            else {
+                echo 'query error: ' . mysql_error($conn);
+            }
+
+            
+
         }
 
 

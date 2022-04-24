@@ -1,14 +1,6 @@
 <?php
-// Duas maneira de conectar com o mysql
-// MySQLi (i significa improved) e PDO (php data object)
-// MySQLi
 
-$conn = mysqli_connect('localhost', 'db_user', '1234', 'restaurante_db');
-
-//Checar a conexão
-if (!$conn) {
-    echo 'erro na conexão mysql' . mysqli_connect_error();
-}
+include('config/db_connect.php');
 
 // query para os pedidos
 $sql = 'SELECT nomePedido, adicionais, id FROM pedidos ORDER BY created_at';
@@ -43,23 +35,24 @@ mysqli_close($conn);
     <h4 class="center grey-text">Pedidos</h4>
     <div class="container">
         <div class="row">
-            <?php foreach($pedidos as $pedido){ ?>
+            <?php foreach($pedidos as $pedido): ?>
                 <div class="col s6 md3">
                     <div class="card">
                         <div class="card-content center">
                             <h6><?php echo htmlspecialchars($pedido['nomePedido']);?></h6>
                             <ul>
-                                <?php foreach (explode(',', $pedido['adicionais']) as $ing ) { ?>
+                                <?php foreach (explode(',', $pedido['adicionais']) as $ing ): ?>
                                     <li> <?php echo htmlspecialchars($ing); ?> </li>
-                                <?php } ?>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                         <div class="card-action right-align">
-                            <a href="#" class="brand-text">Mais informações</a>
+                            <a href="details.php?id=<?php echo $pedido['id'] ?>" class="brand-text">Mais informações</a>
                         </div>
                     </div>
                 </div>
-            <?php }?>
+            <?php endforeach; ?>
+
         </div>
     </div>
 
