@@ -343,7 +343,11 @@ exemplos:
 
 ### Sessions
 
+ Modo de deixar o mesmo valor de uma variável entre páginas
+ 
+ server side, não é armazendo como se fosse um cookie no navegador do usuário
 
+A sessão acaba quando fecha o navegador
 
   
 <?php 
@@ -373,3 +377,228 @@ exemplos:
 
 </body>
 </html>
+
+
+
+
+### Null coalescing
+
+se o primeiro valor não existir, ele pega o outro.
+
+ $name = $_SESSION['name] ?? 'Guest';
+
+
+
+ ### Cokies
+
+ <?php 
+
+	if(isset($_POST['submit'])){
+
+		//cookie for gender
+		setcookie('gender', $_POST['gender'], time() + 86400);
+
+		session_start();
+
+		$_SESSION['name'] = $_POST['name'];
+
+		header('Location: index.php');
+	}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>php tuts</title>
+</head>
+<body>
+
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+		<input type="text" name="name">
+		<select name="gender">
+			<option value="male">male</option>
+			<option value="female">female</option>
+		</select>
+		<input type="submit" name="submit" value="submit">
+	</form>
+
+</body>
+</html>
+
+
+
+### File system
+
+Interargir com arquivos do sistema
+
+
+readme.txt
+Be yourself; everyone else is already taken.
+We are all in the gutter, but some of us are looking at the stars.
+To live is the rarest thing in the world. Most people exist, that is all.
+I can resist everything except temptation.
+The truth is rarely pure and never simple.
+Life is too important to be taken seriously.
+
+
+
+<?php 
+	 Ler um arquivo e armazenar numa variável
+
+	// $quotes = readfile("readme.txt");
+	// echo $quotes;
+
+	$file = 'readme.txt';
+
+  //Checar se um arquivo existe, antes de tentar ler
+
+	if(file_exists($file)){
+
+		// read file
+		echo readfile($file) . '<br />';
+
+		// copy file
+    //vai criar um arquivo como nome 'quotes.txt'
+		copy($file, 'quotes.txt');
+
+		// absolute path
+		echo realpath($file) . '<br />';
+
+		// file size
+		echo filesize($file) . '<br />';
+
+		// rename the file
+		rename($file, 'test.txt');
+
+	} else {
+		echo 'file does not exist';
+	}
+
+	// make directory
+	mkdir('quotes');
+
+?>
+
+
+### file system 2
+
+<?php
+
+	$file = 'quotes.txt'; 
+	
+	// opening a file for reading
+	// $handle = fopen($file, 'r');
+
+	// read the file
+	// echo fread($handle, filesize($file));
+	// echo fread($handle, 112);
+
+	// read a single line
+	// echo fgets($handle);
+	// echo fgets($handle);
+
+	// read a single character
+	// echo fgetc($handle);
+	// echo fgetc($handle);
+
+	// $handle = fopen($file, 'r+');
+	// $handle = fopen($file, 'a+');
+
+	// writing to a file
+	// fwrite($handle, "\nEverything popular is wrong.");
+
+	// fclose($file);	
+
+  //detelar o arquivo: 
+
+	unlink($file);
+
+?>
+
+
+### classes
+
+<?php
+
+	class User {
+
+		public $email;
+		public $name;
+
+		public function __construct($name, $email){
+			// $this->name = 'mario';
+			// $this->email = 'mario@thenetninja.co.uk';
+			$this->name = $name;
+			$this->email = $email;
+		}
+
+		public function login(){
+			// echo 'the user logged in';
+			echo $this->name . ' logged in';
+		}
+
+	}
+
+	// $userOne = new User();
+	
+	// $userOne->login();
+	// echo $userOne->name;
+
+	$userTwo = new User('yoshi', 'yoshi@thenetninja.co.uk');
+
+	// echo $userTwo->email;
+	$userTwo->login();
+
+
+
+?>
+
+
+### classes 2
+
+<?php
+
+	class User {
+
+		private $email;
+		private $name;
+
+		public function __construct($name, $email){
+			// $this->name = 'mario';
+			// $this->email = 'mario@thenetninja.co.uk';
+			$this->name = $name;
+			$this->email = $email;
+		}
+
+		public function login(){
+			// echo 'the user logged in';
+			echo $this->name . ' logged in';
+		}
+
+		public function getName(){
+			return $this->name;
+		}
+
+		public function setName($name){
+			if(is_string($name) && strlen($name) > 1){
+				$this->name = $name;
+				return "name updated to $name";
+			} else {
+				return 'not a valid name';
+			}
+		}
+
+	}
+
+	$userTwo = new User('yoshi', 'yoshi@thenetninja.co.uk');
+
+	// $userTwo->name = 'mario';
+	// echo $userTwo->name;
+
+	// echo $userTwo->getName();
+	// echo $userTwo->setName('shaun');
+	// echo $userTwo->getName();
+
+?>
+
