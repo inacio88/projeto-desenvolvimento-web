@@ -320,4 +320,56 @@ echo($name); //vai mostrar 'wario'
 
 
 
+### Operadores ternários
 
+ $score = 50;
+
+ $retorno = $score > 40 ? 'sim, é maior' : 'não é maior';
+  echo $retorno;
+
+
+### Superglobals
+
+são arrays especiais
+
+exemplos:
+- $_GET['name']
+- $_POST['name'] 
+- $_SERVER['SERVER_NAME']
+- $SERVER['REQUEST_METHOD']
+- $SERVER['SCRIPT_FILENAME']
+- $SERVER['PHP_SELF']
+
+
+### Sessions
+
+
+
+  
+<?php 
+
+	if(isset($_POST['submit'])){
+
+		session_start();
+
+		$_SESSION['name'] = $_POST['name'];
+
+		header('Location: index.php');
+	}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>php tuts</title>
+</head>
+<body>
+
+	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+		<input type="text" name="name">
+		<input type="submit" name="submit" value="submit">
+	</form>
+
+</body>
+</html>
