@@ -61,23 +61,60 @@
         else{
             //echo 'O formulário está válido';
             
+            //Mysqli-----------------------------------------
             //Essa função é para lidar com sql injection
-            $email = mysqli_real_escape_string($conn, $_POST['email']);
-            $nomePedido = mysqli_real_escape_string($conn, $_POST['nomePedido']);
-            $adicionais = mysqli_real_escape_string($conn, $_POST['adicionais']);
+            // $email = mysqli_real_escape_string($conn, $_POST['email']);
+            // $nomePedido = mysqli_real_escape_string($conn, $_POST['nomePedido']);
+            // $adicionais = mysqli_real_escape_string($conn, $_POST['adicionais']);
 
             //Criando a query sql
 
-            $sql = "INSERT INTO pedidos(nomePedido, email, adicionais) VALUES('$nomePedido','$email','$adicionais')";
+            // $sql = "INSERT INTO pedidos(nomePedido, email, adicionais) VALUES('$nomePedido','$email','$adicionais')";
 
             
-            // salvar no banco e checar
-            if(mysqli_query($conn, $sql)){
-                //Se a query tiver dado certo
+            // // salvar no banco e checar
+            // if(mysqli_query($conn, $sql)){
+            //     //Se a query tiver dado certo
+            //     header('Location: index.php');
+            // }
+            // else {
+            //     echo 'query error: ' . mysql_error($conn);
+            // }
+
+
+            //---------------------------------------------------
+            //---------------------PDO---------------------------
+            //---------------------------------------------------
+            // try {
+
+            //     $stmt = $pdo->prepare('INSERT INTO pessoas VALUES(:id, :nome, :fone, :email, :insta)');
+            //     $stmt->execute(array(
+            //       ':id'    => Null,
+            //       ':nome'  => $nome,
+            //       ':fone'  => $fone,
+            //       ':email' => $email,
+            //       ':insta' => $insta
+            //     ));
+            //     echo("<script>alert('Dados registrados com sucesso....');</script>");
+            //     //echo $stmt->rowCount();
+            //   } catch(PDOException $e) {
+            //     echo 'Error: ' . $e->getMessage();
+            //   }
+
+            try {
+                $stmt = $pdo->prepare('INSERT INTO pedidos(id, nomePedido, email, adicionais) VALUES(:id, :nomePedido, :adicionais, :email)');
+                $stmt->execute(array(
+                    ':id' => NULL,
+                    ':nomePedido' => $nomePedido,
+                    ':email' => $email,
+                    ':adicionais' => $adicionais,
+                    
+                    
+                ));
                 header('Location: index.php');
-            }
-            else {
-                echo 'query error: ' . mysql_error($conn);
+
+            } catch(PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
             }
 
             
