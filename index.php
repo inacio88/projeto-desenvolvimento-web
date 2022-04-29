@@ -2,24 +2,31 @@
 
 include('config/db_connect.php');
 
+// Conexão por PDO
+$consulta = $pdo->query("SELECT nomePedido, adicionais, id FROM pedidos ORDER BY created_at;");
+$pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+//print_r($pedidos);
+//------------------------------------------
+
+//Conexão por MYSQLi
 // query para os pedidos
-$sql = 'SELECT nomePedido, adicionais, id FROM pedidos ORDER BY created_at';
+//$sql = 'SELECT nomePedido, adicionais, id FROM pedidos ORDER BY created_at';
 
 // fazer a query e pegar os retornos
-$result = mysqli_query($conn, $sql);
+//$result = mysqli_query($conn, $sql);
 
 //Pegar o resultado como linhas em um array
-$pedidos = mysqli_fetch_all($result, MYSQLI_ASSOC);
+//$pedidos = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 //Liberar o resultado da memória
 
-mysqli_free_result($result);
+//mysqli_free_result($result);
 
 //Fechar a conexão com o banco
-mysqli_close($conn);
+//mysqli_close($conn);
 
 //Imprimindo o array
-//print_r($pedidos);
+print_r($pedidos);
 
 
 //
