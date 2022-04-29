@@ -102,7 +102,7 @@
             //   }
 
             try {
-                $stmt = $pdo->prepare('INSERT INTO pedidos(id, nomePedido, email, adicionais) VALUES(:id, :nomePedido, :adicionais, :email)');
+                $stmt = $pdo->prepare('INSERT INTO pedidos(id, nomePedido, email, adicionais) VALUES(:id, :nomePedido, :email, :adicionais)');
                 $stmt->execute(array(
                     ':id' => NULL,
                     ':nomePedido' => $nomePedido,

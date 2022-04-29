@@ -4,16 +4,29 @@
 
 
     if(isset($_POST['delete'])){
-        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+        //$id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+        
         //echo $id_to_delete;
-        $sql = "DELETE FROM pedidos WHERE id = $id_to_delete";
-        if (mysqli_query($conn, $sql)) {
-            //sucesso
+        // $sql = "DELETE FROM pedidos WHERE id = $id_to_delete";
+        // if (mysqli_query($conn, $sql)) {
+        //     //sucesso
+        //     header('Location: index.php');
+        // }
+        // else {
+        //     //falha
+        //     echo 'query error ' . mysqli_error($conn);
+        // }
+
+        $id_to_delete = $_POST['id_to_delete'];
+
+        try {
+            $stmt = $pdo->prepare("DELETE FROM pedidos WHERE id = $id_to_delete");
+            $stmt->bindParam(':id', $id_to_delete);
+            $stmt->execute();
             header('Location: index.php');
-        }
-        else {
-            //falha
-            echo 'query error ' . mysqli_error($conn);
+            
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
         }
     }
     
@@ -21,22 +34,31 @@
 
     //checar get request id parametro
     if (isset($_GET['id'])) {
-        $id = mysqli_real_escape_string($conn, $_GET['id']);
+        // $id = mysqli_real_escape_string($conn, $_GET['id']);
 
-        //a query
-        $sql = "SELECT * FROM pedidos WHERE id = $id";
+        // //a query
+        // $sql = "SELECT * FROM pedidos WHERE id = $id";
 
-        // pegar o retorno da query
+        // // pegar o retorno da query
 
-        $result = mysqli_query($conn, $sql);
+        // $result = mysqli_query($conn, $sql);
 
-        // pegar o retorno em formato de array associativo
-        $pedido = mysqli_fetch_assoc($result);
+        // // pegar o retorno em formato de array associativo
+        // $pedido = mysqli_fetch_assoc($result);
 
-        mysqli_free_result($result);
-        mysqli_close($conn);
+        // mysqli_free_result($result);
+        // mysqli_close($conn);
 
         //print_r($pedido);
+
+        //------------------------------------------------------------
+        //-----------------------------PDO----------------------------
+        //------------------------------------------------------------
+        $id = $_GET['id'];
+        $consulta = $pdo->query("SELECT * FROM pedidos WHERE id = $id;");
+        $pedido = $consulta->fetch(PDO::FETCH_ASSOC);
+
+
     }
 
 ?>

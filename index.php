@@ -26,7 +26,7 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 //mysqli_close($conn);
 
 //Imprimindo o array
-print_r($pedidos);
+//print_r($pedidos);
 
 
 //
