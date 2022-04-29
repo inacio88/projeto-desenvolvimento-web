@@ -20,7 +20,7 @@
         $id_to_delete = $_POST['id_to_delete'];
 
         try {
-            $stmt = $pdo->prepare("DELETE FROM pedidos WHERE id = $id_to_delete");
+            $stmt = $pdo->prepare("DELETE FROM pedidos WHERE id = :id");
             $stmt->bindParam(':id', $id_to_delete);
             $stmt->execute();
             header('Location: index.php');
