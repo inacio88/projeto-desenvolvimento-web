@@ -70,12 +70,20 @@
     <div class="container center">
         <?php if($pedido):  ?>
 
-            <h4><?php  echo htmlspecialchars($pedido['nomePedido']);  ?></h4>
-            <p>Pedido feito por: <?php echo htmlspecialchars($pedido['email']);  ?></p>
-            <p><?php echo date($pedido['created_at']);  ?></p>
+            <!-- <h4><?php  //echo htmlspecialchars($pedido['nomePedido']);  ?></h4>
+            <p>Pedido feito por: <?php //echo htmlspecialchars($pedido['email']);  ?></p>
+            <p><?php //echo date($pedido['created_at']);  ?></p>
             <h5>Adicionais</h5>
-            <p><?php echo htmlspecialchars($pedido['adicionais']);  ?></p>
+            <p><?php //echo htmlspecialchars($pedido['adicionais']);  ?></p> -->
 
+
+            <section>
+                <h5>Detalhes do pedido: <input type="text" value="<?php echo htmlspecialchars($pedido['nomePedido']);?>"></h5>
+                <p>Pedido feito por: <input type="text" value="<?php echo htmlspecialchars($pedido['email']);?>"> </p>
+                <h6>Adicionais</h6>
+                <p><input type="text" value="<?php echo htmlspecialchars($pedido['adicionais']);  ?>"></p>
+                <p>Criado em: <?php echo date($pedido['created_at']); ?> </p>
+            </section>
             <div class='box'>
                 <!-- Deletar -->
                 <div>
@@ -88,7 +96,7 @@
                 <div>
                     <form action="details.php" method="POST">
                         <input type="hidden" name="id_to_edit" value="<?php echo $pedido['id'] ?>">
-                        <input type="submit" name="edit" value="Editar"  class="btn" >
+                        <input type="submit" name="edit" value="Salvar Alterações"  class="btn" >
                     </form>
                 </div>
             </div>
