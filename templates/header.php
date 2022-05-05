@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <script src="script.js"></script>
     <style type="text/css">
         .brand{
             background: #cbb09c !important;
@@ -23,6 +23,10 @@
             display: block;
             position: relative;
             top: -30px;
+        }
+        .box{
+            display: flex;
+            justify-content: center;
         }
     </style>
 

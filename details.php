@@ -2,7 +2,7 @@
 
     include('config/db_connect.php');
 
-
+    //Deletar
     if(isset($_POST['delete'])){
        
 
@@ -18,7 +18,32 @@
             echo 'Error: ' . $e->getMessage();
         }
     }
-    
+    //Editar
+    if(isset($_POST['edit'])){
+       
+
+        $id = $_POST['id_to_edit'];
+        // $nomePedido = $pedido['nomePedido'];
+        // $email = $pedido['email'];
+        // $adicionais = $pedido['adicionais'];
+        $nomePedido = "pedido5";
+        $email = "b5@mail.com";
+        $adicionais = "dddddd";
+
+        try {
+            $stmt = $pdo->prepare('UPDATE pedidos SET nomePedido = :nomePedido, email = :email, adicionais = :adicionais WHERE id = :id ');
+            $stmt->execute(array(
+                ':id' => $id,
+                ':nomePedido' => $nomePedido,
+                ':email' => $email,
+                ':adicionais' => $adicionais
+            ));
+            header('Location: index.php');
+            
+        } catch(PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 
 
     //checar get request id parametro
@@ -51,14 +76,24 @@
             <h5>Adicionais</h5>
             <p><?php echo htmlspecialchars($pedido['adicionais']);  ?></p>
 
-
-            <!-- Deletar -->
-            <form action="details.php" method="POST">
-                <input type="hidden" name="id_to_delete" value="<?php echo $pedido['id'] ?>">
-                <input type="submit" name="delete" value="Delete"  class="btn">
-            </form>
-
-        <?php  else: ?>
+            <div class='box'>
+                <!-- Deletar -->
+                <div>
+                    <form action="details.php" method="POST">
+                        <input type="hidden" name="id_to_delete" value="<?php echo $pedido['id'] ?>">
+                        <input type="submit" name="delete" value="Deletar"  class="btn">
+                    </form>
+                </div>
+                <!-- Editar -->
+                <div>
+                    <form action="details.php" method="POST">
+                        <input type="hidden" name="id_to_edit" value="<?php echo $pedido['id'] ?>">
+                        <input type="submit" name="edit" value="Editar"  class="btn" >
+                    </form>
+                </div>
+            </div>
+        
+            <?php  else: ?>
             <!-- fazer algo em javascript aqui -->
             <h5>Esse pedido não existe</h5>
         <?php  endif;  ?>
