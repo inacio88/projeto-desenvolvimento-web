@@ -91,27 +91,28 @@
 
     <?php include('templates/header.php'); ?>
 
+    <div class="container detalhe">
+        <section class="grey-text detalhe">
+            <h4 class="center">Add pedido</h4>
+            <form action="add.php" method="POST" class="white">
+                <label> Email: </label>
+                <input type="text" name="email" value="<?php echo htmlspecialchars($email) ?>">
+                <div class="red-text"> <?php echo $erros['email']; ?> </div>
 
-    <section class="container grey-text">
-        <h4 class="center">Add pedido</h4>
-        <form action="add.php" method="POST" class="white">
-            <label> Email: </label>
-            <input type="text" name="email" value="<?php echo htmlspecialchars($email) ?>">
-            <div class="red-text"> <?php echo $erros['email']; ?> </div>
+                <label> Nome do pedido: </label>
+                <input type="text" name="nomePedido" value="<?php echo htmlspecialchars($nomePedido) ?>"> 
+                <div class="red-text"> <?php echo $erros['nomePedido']; ?> </div>
 
-            <label> Nome do pedido: </label>
-            <input type="text" name="nomePedido" value="<?php echo htmlspecialchars($nomePedido) ?>"> 
-            <div class="red-text"> <?php echo $erros['nomePedido']; ?> </div>
+                <label> Adicionais: </label>
+                <input type="text" name="adicionais" value="<?php echo htmlspecialchars($adicionais) ?>">
+                <div class="red-text"> <?php echo $erros['adicionais']; ?> </div>
 
-            <label> Adicionais: </label>
-            <input type="text" name="adicionais" value="<?php echo htmlspecialchars($adicionais) ?>">
-            <div class="red-text"> <?php echo $erros['adicionais']; ?> </div>
-
-            <div class="center">
-                <input type="submit" name="submit" value="submit" class="btn brand">
-            </div>
-        </form>
-    </section>
+                <div class="center">
+                    <input type="submit" name="submit" value="submit" class="btn brand">
+                </div>
+            </form>
+        </section>
+    </div>
 
     <?php include('templates/footer.php'); ?>
     

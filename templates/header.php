@@ -12,10 +12,11 @@
         .brand-text{
             color: #cbb09c !important;
         }
-        form{
+        div.detalhe{
             max-width: 460px;
-            margin: 20px auto;
+            display: flex;
             padding: 20px;
+            justify-content: center;
         }
         .pizza{
             width: 100px;
@@ -25,17 +26,21 @@
             top: -30px;
         }
         .box{
-            display: flex;
-            justify-content: center;
+            display: inline-flex;
+            gap: 10px;
+            margin-top: 10px;
         }
-        section{
+        section.detalhe{
             background: white;
             border-radius: 10px;
             padding: 45px;
             width: 700px;
-            margin: auto;
+            /* margin: auto; */
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.525);
 
+        }
+        .container > section{
+            margin-top: 10px;
         }
     </style>
 
