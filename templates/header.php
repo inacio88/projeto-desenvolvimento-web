@@ -5,44 +5,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="script.js"></script>
-    <style type="text/css">
-        .brand{
-            background: #cbb09c !important;
-        }
-        .brand-text{
-            color: #cbb09c !important;
-        }
-        div.detalhe{
-            max-width: 460px;
-            display: flex;
-            padding: 20px;
-            justify-content: center;
-        }
-        .pizza{
-            width: 100px;
-            margin: 40px auto -30px;
-            display: block;
-            position: relative;
-            top: -30px;
-        }
-        .box{
-            display: inline-flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        section.detalhe{
-            background: white;
-            border-radius: 10px;
-            padding: 45px;
-            width: 700px;
-            /* margin: auto; */
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.525);
-
-        }
-        .container > section{
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 
 
     <title>Restaurante etc</title>

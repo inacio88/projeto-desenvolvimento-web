@@ -30,7 +30,7 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                             </ul>
                         </div>
                         <div class="card-action right-align">
-                            <a href="details.php?id=<?php echo $pedido['id'] ?>" class="brand-text">Mais informações</a>
+                            <a href="form_details.php?id=<?php echo $pedido['id'] ?>" class="brand-text">Mais informações</a>
                         </div>
                     </div>
                 </div>
