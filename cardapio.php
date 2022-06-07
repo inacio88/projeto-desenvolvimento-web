@@ -76,6 +76,7 @@ if (isset($_GET['id'])) {
             <ul id="nav-mobile" class="right hide-on-small-and-down">
                 <li><a href="addPrato.php" class="btn brand">Add prato</a></li>
                 <li><a href="cardapio.php?clear=1" class="btn brand">Limpar pedido</a></li> 
+                <li><a href="comanda.php" class="btn brand">Ver pedidos</a></li>
             </ul>
         </div>
     </nav>
@@ -106,8 +107,8 @@ if (isset($_GET['id'])) {
                             <!-- <a href="cardapio.php?id=<?php //echo $prato['id'] ?>" class="brand-text">Add à comanda</a> -->
                             <form action="cardapio.php" method="get">
                                     <input type="hidden" name="id" id="id" value="<?php echo $prato['id'] ?>">
-                                    <label for="quantidade">Quantidade</label>
-                                    <input type="number" name="quantidade" id="quantidade" min="0" max="9" size="5">
+                                    <label for="quantidade">Quantidade: </label>
+                                    <input type="number" name="quantidade" id="quantidade" min="0" max="9" style="width: 40px">
                                     <input type="submit" value="Add à comanda" class="brand-text">
                             </form>
                         </div>
