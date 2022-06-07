@@ -11,10 +11,26 @@ if (!(isset($_SESSION['comanda']))) {
     //echo "sfae";
 }
 
+if (!(isset($_SESSION['cliente']))) {
+    $_SESSION['cliente'];
+    //echo "sfae";
+}
+
 //Limbar a comanda
 if (isset($_GET['clear'])) {
     $_SESSION['comanda'] = array();
 }
+
+//Add na sessão dados da mesa
+if (isset($_POST['nomeCliente'])) {
+    $_SESSION['cliente']['nomeCliente'] = $_POST['nomeCliente'];
+    $_SESSION['cliente']['idMesa'] = $_POST['idMesa'];
+    $_SESSION['cliente']['pedidos'] = $pedidos;
+    $_SESSION['cliente']['obs'] = $_POST['obs'];
+    print_r($_SESSION['cliente']);
+}
+
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -39,14 +55,14 @@ if (isset($_GET['id'])) {
 <!DOCTYPE html>
 <html lang="pt-br">
 
-    <?php //include('templates/header.php'); ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="script.js"></script>
+    
     <link rel="stylesheet" href="style.css">
     <title>Restaurante etc</title>
 </head>
@@ -67,7 +83,7 @@ if (isset($_GET['id'])) {
     <h4 class="center grey-text">Pratos selecionados</h4>
     <div class="container">
         <div class="row">
-        <table>
+        <table id='tabela'>
                     <tr>
                         <th>Item</th>
                         <th>Preço</th>
@@ -78,12 +94,14 @@ if (isset($_GET['id'])) {
 
             <?php
                 $total = 0;
+                $pedidos = "";
                 foreach($_SESSION['comanda'] as $key => $quant): 
                 $consulta = $pdo->query("SELECT * FROM cardapio WHERE id = '$key' ");
                 $linha = $consulta->fetch(PDO::FETCH_ASSOC);
             
                 $subTotal = $linha['preco'] * $quant;
                 $total += $subTotal;
+                $pedidos .=  "$quant - {$linha['nomePrato']};";
             echo "
                 <tr>
                     <td>{$linha['nomePrato']}</td>
@@ -106,15 +124,35 @@ if (isset($_GET['id'])) {
                 echo "<tr><td colspan='5'>Nenhum pedido até agora </td></tr>";
             }
             else {
-                echo "<tr><td colspan='5'>Total: R$ $total </td></tr>";    
+                echo "<tr><td colspan='5'>Total: R$ $total $pedidos </td></tr>";    
             }
             
             ?>
         </table>
+            
+            <h4 class="center">Dados do cliente</h4>
+            <form action="comanda.php" method="POST" class="white">
+                <label> Nome cliente: </label>
+                <input type="text" name="nomeCliente">
+                <div class="red-text"></div>
+
+                <label> Identificação da mesa: </label>
+                <input type="text" name="idMesa">
+                <div class="red-text"></div>
+
+                <label> Obsevações no pedido: </label>
+                <input type="text" name="obs">
+                <div class="red-text"> </div>
+
+                <div class="center">
+                    <input type="submit" name="submit" value="Confirmar" class="btn brand">
+                </div>
+            </form>
+        
         </div>
     </div>
 
     <?php include('templates/footer.php'); ?>
     
-
+    <script src="scriptC.js"></script>
 </html>
