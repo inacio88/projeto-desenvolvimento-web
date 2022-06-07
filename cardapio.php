@@ -32,7 +32,7 @@ if (isset($_GET['id'])) {
 
     echo "id: $id , quantidade: $quantidade";
 
-    if ($id > 0 && filter_var($quantidade, FILTER_VALIDATE_INT)) {
+    if ($quantidade > 0 && filter_var($quantidade, FILTER_VALIDATE_INT)) {
         //Valor valido
         
         if ($_SESSION['comanda'][$id]) {

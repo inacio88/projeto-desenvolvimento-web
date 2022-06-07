@@ -12,14 +12,27 @@ if (!(isset($_SESSION['comanda']))) {
 }
 
 //Limbar a comanda
-
 if (isset($_GET['clear'])) {
     $_SESSION['comanda'] = array();
 }
 
-//Checando se já tem algo na comanda
-//compra
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $quant = $_GET['quant'];
+    
+    if ($quant > 0 && filter_var($quant, FILTER_VALIDATE_INT)) {
+        //Valor valido
+        $_SESSION['comanda'][$id] = $quant;
+    }
 
+    elseif($quant==0){
+        unset($_SESSION['comanda'][$id]);
+    }
+    else{
+        //Fazer algo em JS aqui
+        echo "Inválido";
+    }
+}
 
 ?>
 
@@ -59,7 +72,7 @@ if (isset($_GET['clear'])) {
                         <th>Item</th>
                         <th>Preço</th>
                         <th>Quantidade</th>
-                        <th>Tempo preparo (min)</th>
+                        <th>Tempo preparo por prato (min)</th>
                         <th>Subtotal</th>
                     </tr>
 
@@ -75,7 +88,13 @@ if (isset($_GET['clear'])) {
                 <tr>
                     <td>{$linha['nomePrato']}</td>
                     <td>{$linha['preco']}</td>
-                    <td>$quant</td>
+                    <td>
+                    <form action='comanda.php' method='GET'>
+                        <input type='number' name='quant' value='$quant' style='width: 40px' min='0'>
+                        <input type='hidden' name='id' value='$key'>
+                        <input type='submit' value='atualizar'>
+                    </form>
+                    </td>
                     <td>{$linha['tempoPreparo']}</td>
                     <td>R$ $subTotal</td>
 
