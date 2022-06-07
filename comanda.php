@@ -19,15 +19,19 @@ if (!(isset($_SESSION['cliente']))) {
 //Limbar a comanda
 if (isset($_GET['clear'])) {
     $_SESSION['comanda'] = array();
+    $_SESSION['cliente'] = array();
 }
 
 //Add na sessão dados da mesa
 if (isset($_POST['nomeCliente'])) {
     $_SESSION['cliente']['nomeCliente'] = $_POST['nomeCliente'];
     $_SESSION['cliente']['idMesa'] = $_POST['idMesa'];
-    $_SESSION['cliente']['pedidos'] = $pedidos;
     $_SESSION['cliente']['obs'] = $_POST['obs'];
+    $_SESSION['cliente']['pedidos'] = $_POST['pedidos'];
     print_r($_SESSION['cliente']);
+    
+    //Inserir no banco
+
 }
 
 
@@ -124,7 +128,7 @@ if (isset($_GET['id'])) {
                 echo "<tr><td colspan='5'>Nenhum pedido até agora </td></tr>";
             }
             else {
-                echo "<tr><td colspan='5'>Total: R$ $total $pedidos </td></tr>";    
+                echo "<tr><td colspan='5'>Total: R$ $total <br> $pedidos </td></tr>";    
             }
             
             ?>
@@ -133,6 +137,8 @@ if (isset($_GET['id'])) {
             <h4 class="center">Dados do cliente</h4>
             <form action="comanda.php" method="POST" class="white">
                 <label> Nome cliente: </label>
+                <input type="hidden" name="pedidos" value="<?php echo $pedidos ?>">
+
                 <input type="text" name="nomeCliente">
                 <div class="red-text"></div>
 
