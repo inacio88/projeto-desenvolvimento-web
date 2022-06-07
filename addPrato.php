@@ -77,7 +77,7 @@
                     
                     
                 ));
-                header('Location: index.php');
+                header('Location: cardapio.php');
 
             } catch(PDOException $e) {
                 echo 'Error: ' . $e->getMessage();
