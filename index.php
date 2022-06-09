@@ -54,9 +54,13 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                             </ul>
                             <?php echo "Obs: " . htmlspecialchars($pedido['obs']);?>
                         </div>
+                        <form action="">
+                        <div class="card-action right-align">
+                            <a href="gerenciarPedidos.php?estado=<?php echo $pedido['id'] ?>" class="brand-text">Pedido pronto</a>
+                            <a href="gerenciarPedidos.php?deletar=<?php echo $pedido['id'] ?>" class="brand-text">Deletar pedido</a>
+                        </div>
                         
                             
-                        
                     </div>
                 </div>
             <?php endforeach; ?>
