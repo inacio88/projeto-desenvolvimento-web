@@ -30,6 +30,7 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
             <a href="index.php" class="brand-logo brand-text">Restaurante etc</a>
             <ul id="nav-mobile" class="right hide-on-small-and-down">
             <li><a href="addPrato.php" class="btn brand">Add prato</a></li>
+            <li><a href="gerenciarPrato.php" class="btn brand">Gerenciar pratos</a></li>
             </ul>
         </div>
     </nav>
@@ -53,9 +54,9 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                             </ul>
                             <?php echo "Obs: " . htmlspecialchars($pedido['obs']);?>
                         </div>
-                        <div class="card-action right-align">
-                            <a href="form_details.php?id=<?php echo $pedido['id'] ?>" class="brand-text">Mais informações</a>
-                        </div>
+                        
+                            
+                        
                     </div>
                 </div>
             <?php endforeach; ?>

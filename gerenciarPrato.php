@@ -7,48 +7,6 @@ $consulta = $pdo->query("SELECT id, nomePrato, preco, tempoPreparo, ingredientes
 $pratos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
 
-//Comanda
-
-session_start();
-
-if (!(isset($_SESSION['comanda']))) {
-    $_SESSION['comanda'];
-    //echo "sfae";
-}
-
-//Limbar a comanda
-
-if (isset($_GET['clear'])) {
-    $_SESSION['comanda'] = array();
-}
-
-//Checando se já tem algo na comanda
-//compra
-$out = "";
-if (isset($_GET['id'])) {
-
-    $id = $_GET['id'];
-    $quantidade = $_GET['quantidade'];
-
-    echo "id: $id , quantidade: $quantidade";
-
-    if ($quantidade > 0 && filter_var($quantidade, FILTER_VALIDATE_INT)) {
-        //Valor valido
-        
-        if ($_SESSION['comanda'][$id]) {
-            $_SESSION['comanda'][$id] += $quantidade;
-        }
-        else{
-            $_SESSION['comanda'][$id] = $quantidade;
-        }
-
-    }
-    else{
-        //Valor ruim
-        $out = "Valor inválido";
-    }
-
-}
 
 
 ?>
@@ -82,7 +40,7 @@ if (isset($_GET['id'])) {
     </nav>
 
     <?php
-        //print_r($_SESSION['comanda']);
+        print_r($_SESSION['comanda']);
         echo $out;
     ?>
 
@@ -106,10 +64,7 @@ if (isset($_GET['id'])) {
                         <div class="card-action right-align">
                             <!-- <a href="cardapio.php?id=<?php //echo $prato['id'] ?>" class="brand-text">Add à comanda</a> -->
                             <form action="cardapio.php" method="get">
-                                    <input type="hidden" name="id" id="id" value="<?php echo $prato['id'] ?>">
-                                    <label for="quantidade">Quantidade: </label>
-                                    <input type="number" name="quantidade" id="quantidade" min="0" max="9" style="width: 40px">
-                                    <input type="submit" value="Add à comanda" class="brand-text">
+                            <a href="form_details.php?id=<?php echo $prato['id'] ?>" class="brand-text">Mais informações</a>
                             </form>
                         </div>
                     </div>

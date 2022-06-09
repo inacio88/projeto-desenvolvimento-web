@@ -28,7 +28,7 @@ if (isset($_POST['nomeCliente'])) {
     $_SESSION['cliente']['idMesa'] = $_POST['idMesa'];
     $_SESSION['cliente']['obs'] = $_POST['obs'];
     $_SESSION['cliente']['pedidos'] = $_POST['pedidos'];
-    print_r($_SESSION['cliente']);
+    //print_r($_SESSION['cliente']);
     
     //Inserir no banco
     try {
@@ -42,7 +42,8 @@ if (isset($_POST['nomeCliente'])) {
             ':estado' => 0
             
         ));
-        //header('Location: index.php');
+        $_SESSION['comanda'] = array();
+        $_SESSION['cliente'] = array();
 
     } catch(PDOException $e) {
         echo 'Error: ' . $e->getMessage();
