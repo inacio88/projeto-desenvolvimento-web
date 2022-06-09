@@ -39,6 +39,7 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
     <div class="container">
         <div class="row">
             <?php foreach($pedidos as $pedido): ?>
+                <?php if ($pedido['estado'] != 1){?>
                 <div class="col s6 md3">
                     <div class="card">
                         <img src="img/pizza.svg" class="pizza">
@@ -63,6 +64,7 @@ $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
                             
                     </div>
                 </div>
+                <?php } ?>
             <?php endforeach; ?>
 
         </div>
