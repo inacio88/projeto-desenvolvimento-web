@@ -23,20 +23,22 @@
        
 
         $id = $_POST['id_to_edit'];
-        $nomePedido = $_POST['nomePedido'];
-        $email = $_POST['email'];
-        $adicionais = $_POST['adicionais'];
+        $nomePrato = $_POST['nomePrato'];
+        $preco = $_POST['preco'];
+        $tempoPreparo = $_POST['tempoPreparo'];
+        $ingredientes = $_POST['ingredientes'];
         // $nomePedido = "pedido5";
         // $email = "b5@mail.com";
         // $adicionais = "dddddd";
-
+//("SELECT id, nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes");
         try {
-            $stmt = $pdo->prepare('UPDATE pedidos SET nomePedido = :nomePedido, email = :email, adicionais = :adicionais WHERE id = :id ');
+            $stmt = $pdo->prepare('UPDATE pedidos SET nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes WHERE id = :id ');
             $stmt->execute(array(
                 ':id' => $id,
-                ':nomePedido' => $nomePedido,
-                ':email' => $email,
-                ':adicionais' => $adicionais
+                'nomePrato' => $nomePrato, 
+                'preco' => $preco, 
+                'tempoPreparo' => $tempoPreparo, 
+                'ingredientes' => $ingredientes
             ));
             header('Location: index.php');
             

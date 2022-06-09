@@ -72,9 +72,9 @@ if (isset($_GET['id'])) {
 <body class="grey lighten-4">
     <nav class="white">
         <div class="container">
-            <a href="index.php" class="brand-logo brand-text">Restaurante etc</a>
+            <a href="cardapio.php" class="brand-logo brand-text">Restaurante etc</a>
             <ul id="nav-mobile" class="right hide-on-small-and-down">
-                <li><a href="addPrato.php" class="btn brand">Add prato</a></li>
+                
                 <li><a href="cardapio.php?clear=1" class="btn brand">Limpar pedido</a></li> 
                 <li><a href="comanda.php" class="btn brand">Ver pedidos</a></li>
             </ul>

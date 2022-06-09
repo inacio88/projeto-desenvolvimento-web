@@ -53,9 +53,6 @@
         else{
             //echo htmlspecialchars($_POST['adicionais']);
             $ingredientes = $_POST['ingredientes'];
-            if (!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $ingredientes)) {
-                $erros['ingredientes'] =  'O campo de ingredientes está inválido <br/>';
-            }
         }
 
         //Se todas as posições desse array estirem vazias, então essa função retorna falso
@@ -99,7 +96,7 @@
 
     <div class="container detalhe">
         <section class="grey-text detalhe">
-            <h4 class="center">Add prato</h4>
+            <h4 class="center">Add prato/produto</h4>
             <form action="addPrato.php" method="POST" class="white">
                 <label> nomePrato: </label>
                 <input type="text" name="nomePrato" value="<?php echo htmlspecialchars($nomePrato) ?>">

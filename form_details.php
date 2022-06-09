@@ -24,20 +24,17 @@ include('config/db_connect.php');
     <div class="container center detalhe" >
         <?php if($pedido):  ?>
 
-            <!-- <h4><?php  //echo htmlspecialchars($pedido['nomePedido']);  ?></h4>
-            <p>Pedido feito por: <?php //echo htmlspecialchars($pedido['email']);  ?></p>
-            <p><?php //echo date($pedido['created_at']);  ?></p>
-            <h5>Adicionais</h5>
-            <p><?php //echo htmlspecialchars($pedido['adicionais']);  ?></p> -->
+         
 
+<!-- ("SELECT id, nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes"); -->
 
             <form action="details.php" method="POST">
                 <section class="detalhe">
-                    <h5>Detalhes do pedido: <input name="nomePedido" type="text" value="<?php echo htmlspecialchars($pedido['nomePedido']);?>"></h5>
-                    <p>Pedido feito por: <input name="email" type="text" value="<?php echo htmlspecialchars($pedido['email']);?>"> </p>
-                    <h6>Adicionais</h6>
-                    <p><input name="adicionais" type="text" value="<?php echo htmlspecialchars($pedido['adicionais']);  ?>"></p>
-                    <p>Criado em: <?php echo date($pedido['created_at']); ?> </p>
+                    <h5>Detalhes do pedido: <input name="nomePrato" type="text" value="<?php echo htmlspecialchars($pedido['nomePrato']);?>"></h5>
+                    <p>Pedido feito por: <input name="nomeCliente" type="text" value="<?php echo htmlspecialchars($pedido['nomeCliente']);?>"> </p>
+                    <h6>Ingredientes</h6>
+                    <p><input name="ingredientes" type="text" value="<?php echo htmlspecialchars($pedido['ingredientes']);  ?>"></p>
+                    
                 </section>
                 <div class='box'>
                     <!-- Editar -->

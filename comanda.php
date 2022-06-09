@@ -31,6 +31,22 @@ if (isset($_POST['nomeCliente'])) {
     print_r($_SESSION['cliente']);
     
     //Inserir no banco
+    try {
+        $stmt = $pdo->prepare('INSERT INTO pedidos(id, nomeCliente, idMesa, obs, pedido, estado) VALUES(:id, :nomeCliente, :idMesa, :obs, :pedido, :estado)');
+        $stmt->execute(array(
+            ':id' => NULL,
+            ':nomeCliente' => $_SESSION['cliente']['nomeCliente'], 
+            ':idMesa' => $_SESSION['cliente']['idMesa'], 
+            ':obs' => $_SESSION['cliente']['obs'], 
+            ':pedido'=> $_SESSION['cliente']['pedidos'], 
+            ':estado' => 0
+            
+        ));
+        //header('Location: index.php');
+
+    } catch(PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
 
 }
 
@@ -75,7 +91,7 @@ if (isset($_GET['id'])) {
 <body class="grey lighten-4">
     <nav class="white">
         <div class="container">
-            <a href="index.php" class="brand-logo brand-text">Restaurante etc</a>
+            <a href="cardapio.php" class="brand-logo brand-text">Restaurante etc</a>
             <ul id="nav-mobile" class="right hide-on-small-and-down">
                 <li><a href="comanda.php?clear=1" class="btn brand">Limpar pedido</a></li>
                 <li><a href="cardapio.php" class="btn brand">Cardápio</a></li>
