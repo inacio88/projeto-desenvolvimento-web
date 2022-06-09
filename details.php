@@ -9,7 +9,7 @@
         $id_to_delete = $_POST['id_to_delete'];
 
         try {
-            $stmt = $pdo->prepare("DELETE FROM pedidos WHERE id = :id");
+            $stmt = $pdo->prepare("DELETE FROM cardapio WHERE id = :id");
             $stmt->bindParam(':id', $id_to_delete);
             $stmt->execute();
             header('Location: index.php');
@@ -27,12 +27,8 @@
         $preco = $_POST['preco'];
         $tempoPreparo = $_POST['tempoPreparo'];
         $ingredientes = $_POST['ingredientes'];
-        // $nomePedido = "pedido5";
-        // $email = "b5@mail.com";
-        // $adicionais = "dddddd";
-//("SELECT id, nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes");
         try {
-            $stmt = $pdo->prepare('UPDATE pedidos SET nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes WHERE id = :id ');
+            $stmt = $pdo->prepare('UPDATE cardapio SET nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes WHERE id = :id ');
             $stmt->execute(array(
                 ':id' => $id,
                 'nomePrato' => $nomePrato, 

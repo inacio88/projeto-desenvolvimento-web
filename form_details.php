@@ -8,7 +8,7 @@ include('config/db_connect.php');
     //-----------------------------PDO----------------------------
     //------------------------------------------------------------
     $id = $_GET['id'];
-    $consulta = $pdo->query("SELECT * FROM pedidos WHERE id = $id;");
+    $consulta = $pdo->query("SELECT * FROM cardapio WHERE id = $id;");
     $pedido = $consulta->fetch(PDO::FETCH_ASSOC);
 
 
@@ -26,12 +26,12 @@ include('config/db_connect.php');
 
          
 
-<!-- ("SELECT id, nomePrato = :nomePrato, preco = :preco, tempoPreparo = :tempoPreparo, ingredientes = :ingredientes"); -->
 
             <form action="details.php" method="POST">
                 <section class="detalhe">
                     <h5>Detalhes do pedido: <input name="nomePrato" type="text" value="<?php echo htmlspecialchars($pedido['nomePrato']);?>"></h5>
-                    <p>Pedido feito por: <input name="nomeCliente" type="text" value="<?php echo htmlspecialchars($pedido['nomeCliente']);?>"> </p>
+                    <p>Preço: <input name="preco" type="text" value="<?php echo htmlspecialchars($pedido['preco']);?>"> </p>
+                    <p>Tempo de preparo: <input name="tempoPreparo" type="text" value="<?php echo htmlspecialchars($pedido['tempoPreparo']);?>"> </p>
                     <h6>Ingredientes</h6>
                     <p><input name="ingredientes" type="text" value="<?php echo htmlspecialchars($pedido['ingredientes']);  ?>"></p>
                     
